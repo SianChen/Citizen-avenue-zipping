@@ -4,6 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>縫合市民大道：華山篇</title>
+<meta name="description" content="拆圍籬、架陸橋、把橋下變成球場和市集——用像素小遊戲體驗市民大道南北縫合的前後差異。個人製作、非官方。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="縫合市民大道：華山篇">
+<meta property="og:title" content="縫合市民大道：華山篇｜你會怎麼把南北縫起來？">
+<meta property="og:description" content="拆圍籬、架陸橋、把橋下變成球場和市集。看路人的怒氣條從爆紅變成冒愛心。個人製作的非官方像素小遊戲。">
+<meta property="og:url" content="https://sianchen.github.io/Citizen-avenue-zipping/">
+<meta property="og:image" content="https://sianchen.github.io/Citizen-avenue-zipping/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_TW">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="縫合市民大道：華山篇｜你會怎麼把南北縫起來？">
+<meta name="twitter:description" content="拆圍籬、架陸橋、把橋下變成球場和市集。個人製作的非官方像素小遊戲。">
+<meta name="twitter:image" content="https://sianchen.github.io/Citizen-avenue-zipping/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
@@ -23,13 +37,14 @@ button{font-family:inherit;color:var(--ink);cursor:pointer;touch-action:manipula
 #title{position:absolute;left:8px;top:8px;padding:5px 11px;pointer-events:none}
 #title h1{font-size:16px;margin:0;font-weight:900;letter-spacing:1px}
 #title small{font-size:11px;opacity:.7}
+#title .disc{display:block;font-size:10px;font-weight:700;color:#b5462f;margin-top:1px}
 #menuBtn{display:none;position:absolute;right:8px;top:8px;font-size:15px;font-weight:900;padding:3px 10px}
 #ctrl{position:absolute;right:8px;top:8px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:calc(100% - 250px)}
 .seg{display:flex;padding:0}
 .seg button{border:0;background:transparent;padding:6px 9px;font-weight:700;font-size:12px}
 .seg button+button{border-left:3px solid var(--ink)}
 .seg button.on{background:var(--ink);color:#fff}
-#rail{position:absolute;left:8px;top:62px;bottom:8px;display:flex;flex-direction:column;gap:5px;overflow-y:auto;padding:0 5px 5px 0;scrollbar-width:none}
+#rail{position:absolute;left:8px;top:78px;bottom:8px;display:flex;flex-direction:column;gap:5px;overflow-y:auto;padding:0 5px 5px 0;scrollbar-width:none}
 #rail::-webkit-scrollbar{display:none}
 .tool{border:3px solid var(--ink);background:#fff;padding:4px 8px;font-weight:700;font-size:12px;display:flex;align-items:center;gap:5px;box-shadow:3px 3px 0 rgba(20,18,40,.85);white-space:nowrap;flex:none}
 .tool em{font-style:normal;font-size:10px;background:var(--ink);color:#fff;padding:1px 4px}
@@ -69,7 +84,7 @@ button{font-family:inherit;color:var(--ink);cursor:pointer;touch-action:manipula
 #shareImg{display:block;height:auto;width:auto;align-self:center;max-height:min(74vh,600px);max-width:55%;object-fit:contain;border:3px solid var(--ink);background:#fff;-webkit-touch-callout:default;user-select:auto;-webkit-user-select:auto}
 #share .col{display:flex;flex-direction:column;gap:8px;min-width:200px;flex:1;overflow:auto}
 #share h3{margin:0;font-size:16px;font-weight:900}
-#shareTxt{font-size:12px;line-height:1.6;background:#fff;border:2px dashed #b8ae9a;padding:6px 8px;margin:0;user-select:text;-webkit-user-select:text}
+#shareTxt{white-space:pre-line;font-size:12px;line-height:1.6;background:#fff;border:2px dashed #b8ae9a;padding:6px 8px;margin:0;user-select:text;-webkit-user-select:text}
 #share .btns{display:flex;flex-wrap:wrap;gap:7px}
 #share a.tool{text-decoration:none;color:#fff}
 #share .hint{font-size:11px;opacity:.75;line-height:1.5;margin:0}
@@ -79,7 +94,8 @@ button{font-family:inherit;color:var(--ink);cursor:pointer;touch-action:manipula
 .compact #menuBtn{display:block}
 .compact #ctrl{display:none;top:40px;flex-direction:column;align-items:flex-end;max-width:none;z-index:3}
 .compact #ctrl.show{display:flex}
-.compact #rail{top:36px;gap:4px}
+.compact #rail{top:50px;gap:4px}
+.compact #title .disc{font-size:8.5px;max-width:230px;line-height:1.25}
 .compact .tool{padding:3px 6px;font-size:11px;border-width:2px;box-shadow:2px 2px 0 rgba(20,18,40,.85)}
 .compact .tool em{display:none}
 .compact #prim{right:8px;bottom:8px;gap:6px}
@@ -108,7 +124,7 @@ button{font-family:inherit;color:var(--ink);cursor:pointer;touch-action:manipula
   <canvas id="ui"></canvas>
 </div>
 
-<div id="title" class="px"><h1>縫合市民大道：華山篇</h1><small>打開・跨越・轉化，把橋下還給市民</small></div>
+<div id="title" class="px"><h1>縫合市民大道：華山篇</h1><small>打開・跨越・轉化，把橋下還給市民</small><b class="disc">個人製作・非官方｜與任何候選人、競選團隊、政黨及政府機關無關</b></div>
 <button id="menuBtn" class="px">☰</button>
 <div id="ctrl">
   <div class="seg px" id="modeSeg"><button data-mode="before">改造前</button><button data-mode="after" class="on">改造後</button></div>
@@ -204,8 +220,8 @@ button{font-family:inherit;color:var(--ink);cursor:pointer;touch-action:manipula
     <p><b class="k">打開</b> 在橋下圍籬上拖曳，拆掉綠籬和圍欄。<br>
        <b class="k">跨越</b> 拖曳畫出人行陸橋。往公園多拉幾格會變成緩坡接地；拉得短，盡頭會長出樓梯和電梯。<br>
        <b class="k">轉化</b> 把打開的橋下空間變成球場、休憩花園、寵物綠地、跳舞基地、藝文園區、市集攤販、運動驛站、動漫基地；這些也能放在公園草地和廣場上。</p>
-    <p>單指用工具，雙指隨時可以縮放和移動地圖。手機按「全螢幕」會切成橫向。也可以直接按右下角「一鍵縫合」。</p>
-    <p class="note">地圖是示意、未依實際比例；數字是遊戲模型估算。</p>
+    <p>街上有一隻穿橘背心、戴圓眼鏡的薩摩耶，會到處找路人聊天、聽大家的想法，偶爾站上肥皂箱講解縫合的作法。單指用工具，雙指隨時可以縮放和移動地圖。手機按「全螢幕」會切成橫向。也可以直接按右下角「一鍵縫合」。</p>
+    <p class="note">這是個人製作的非官方小遊戲，與任何候選人、競選團隊、政黨及政府機關無關。改造內容參考沈伯洋〈城市縫合－點亮市民大道〉記者會的公開資料；地圖是示意、未依實際比例，數字是遊戲模型估算。</p>
     <button class="tool" id="startBtn" style="margin-top:8px;background:#ff7a50;color:#fff;font-size:15px;padding:8px 16px">開始縫合 ▶</button>
   </div>
 </div>
@@ -343,7 +359,7 @@ function applyView(){world.style.transform=`translate(${Math.round(panX)}px,${Ma
 const app=document.getElementById('app');let VW=innerWidth,VH=innerHeight,rot=false,compact=false,firstLayout=true,wantLand=false,hadFs=false,portrait=false;
 const pt=e=>rot?[e.clientY,innerWidth-e.clientX]:[e.clientX,e.clientY];
 function fit(){const showSide=!compact&&!side.classList.contains('hide');
-  const x0=portrait?4:(compact?96:128),x1=portrait?VW-4:VW-(showSide?280:8),y0=compact?32:54,y1=VH-(portrait?150:(compact?4:10)),aw=x1-x0,ah=y1-y0;
+  const x0=portrait?4:(compact?96:128),x1=portrait?VW-4:VW-(showSide?280:8),y0=compact?48:54,y1=VH-(portrait?150:(compact?4:10)),aw=x1-x0,ah=y1-y0;
   fitS=Math.min(aw/WW,ah/WH);S=fitS;panX=x0+(aw-WW*S)/2;panY=y0+(ah-WH*S)/2;applyView();}
 function resize(){
   const w=innerWidth,h=innerHeight,coarse=matchMedia('(pointer:coarse)').matches;
@@ -502,6 +518,7 @@ function updatePeds(dtg,dtr){
   const e=env();
   for(const p of peds){
     if(p.bub)p.bub.t-=dtr;
+    if(p.chat>0){p.chat-=dtr;continue;}
     if(p.state==='giveup'||p.state==='arrived'){p.timer-=dtr;p.alpha=Math.min(1,p.timer/.6);continue;}
     p.alpha=Math.min(1,p.alpha+dtr*3);
     if(p.state==='linger'){p.linger-=dtg;calm(p,dtg*.004);if(p.linger<=0){p.state='walk';p.act=null;}continue;}
@@ -527,6 +544,105 @@ function updatePeds(dtg,dtr){
     if(p.anger>=1){p.anger=1;p.state='giveup';p.timer=2.6;say(p,pick(TXT.rage),'bad',true);stats.give++;}
   }
   peds=peds.filter(p=>!((p.state==='giveup'||p.state==='arrived')&&p.timer<=0));
+}
+// ---------- the listening samoyed ----------
+const DOG_HOME=8*W+30;
+const dog={node:DOG_HOME,path:null,i:0,f:0,u:30.5,v:8.5,z:0,alpha:1,ph:1,dx:1,bh:31,state:'walk',moving:false,cool:3,speechCool:22,bub:null,talk:null};
+const DOG_TALKS={
+  mad:[['汪！今天走起來順嗎？','一點都不順，繞好遠…'],['哪一段最卡？','過市民大道要等兩次紅燈'],['如果橋下能直接走過去呢？','那我每天都省好幾分鐘！'],['記下來了，汪！','謝謝你願意聽']],
+  before:[['你平常會走去對面的公園嗎？','很少，過去太麻煩了'],['橋下這排圍籬你覺得呢？','暗暗的，晚上不敢靠近'],['如果變成可以坐的地方？','那我會想帶家人來'],['好，我去跟大家說！','拜託你了～']],
+  after:[
+    [['新的陸橋走過了嗎？','走了！不用等紅燈超順'],['還有哪裡想改？','想要多一點樹蔭和椅子'],['晚上走會怕嗎？','有燈就安心多了'],['收到，汪！','下次再聊～']],
+    [['橋下你最常去哪裡？','市集和休憩花園'],['還缺什麼設施？','小孩想要更大的遊戲場'],['毛孩也有地方跑嗎？','有！牠超開心'],['太好了，汪汪！','謝謝你來問']],
+    [['今天心情怎麼樣？','不錯，散步很舒服'],['從家裡走過來要多久？','比以前快很多'],['有想對這裡說的話嗎？','希望一直這麼熱鬧'],['我也是，汪！','哈哈，掰掰']]]};
+const DOG_SPEECH=[
+  ['各位市民，汪！','市民大道把南北切開太久了','城市縫合有三招：打開、跨越、轉化','打開：拆掉封閉的綠籬和圍欄，讓光進來','車道全部保留，橋下還給市民！'],
+  ['汪汪，聽我說！','跨越：用人行陸橋串起兩邊的公園','華山這一段主打運動和親子','運動驛站、遊戲場、寵物友善綠地','走路就能到，不用再繞路'],
+  ['大家好，汪！','轉化：把橋下突出的舊設施改成能停留的空間','華山、八德、敦化，三個基地一起做','運動、藝文、夜間散步都有地方去','把市民大道還給市民！']];
+const DOG_CHEER=['原來是這樣','聽起來不錯耶','想看看完成的樣子','汪汪隊長加油'];
+function resetDog(){dog.node=DOG_HOME;dog.path=null;dog.i=0;dog.f=0;dog.u=30.5;dog.v=8.5;dog.z=0;dog.state='walk';dog.cool=3;dog.speechCool=22;dog.bub=null;dog.talk=null;}
+function dogSay(t){dog.bub={text:t,tone:'mid',t:3};}
+function updateDog(dtg,dtr){
+  const e=env(),d=dog;if(d.bub)d.bub.t-=dtr;
+  if(d.state==='chat'){const k=d.talk;k.t-=dtr;
+    if(peds.indexOf(k.p)<0){d.state='walk';d.cool=4;d.talk=null;return;}
+    k.p.chat=1;                                   // keep the passer-by here while we talk
+    if(k.t<=0){
+      if(k.n>=k.lines.length*2){d.state='walk';d.cool=6+rnd()*5;calm(k.p,.3);k.p.chat=.4;d.talk=null;return;}
+      const pair=k.lines[k.n>>1];
+      if(k.n%2===0){dogSay(pair[0]);if(k.p.bub)k.p.bub.t=Math.min(k.p.bub.t,.25);}
+      else{say(k.p,pair[1],k.mad&&k.n<5?'bad':'good',true);if(d.bub)d.bub.t=Math.min(d.bub.t,.25);calm(k.p,.05);}
+      k.n++;k.t=1.9;}
+    return;}
+  if(d.state==='speech'){const k=d.talk;k.t-=dtr;
+    if(k.t<=0){if(k.n>=k.lines.length){d.state='walk';d.speechCool=45+rnd()*25;d.cool=3;d.talk=null;
+        let c=0;for(const p of peds){if(c>=3)break;if(p.chat>0&&Math.abs(p.u-d.u)+Math.abs(p.v-d.v)<6){say(p,pick(DOG_CHEER),'good',true);calm(p,.15);p.chat=.8;c++;}}
+        return;}
+      dogSay(k.lines[k.n]);k.n++;k.t=2.7;
+      for(const p of peds){if(p.bike||p.state==='giveup'||p.state==='arrived')continue;if(Math.abs(p.u-d.u)+Math.abs(p.v-d.v)<5&&Math.abs(p.z-d.z)<3)p.chat=3;}}
+    return;}
+  d.cool-=dtr;d.speechCool-=dtr;
+  const ok=n=>{const i=n%N,x=i%W,y=(i/W)|0;return n>=N?e.k[y][x]:gWalk(e,x,y);};
+  if(!d.path||d.i>=d.path.length-1){
+    if(!ok(d.node)){resetDog();return;}
+    const r=solve(e,d.node);let tries=6;d.path=null;
+    while(tries--){const t=facCache.length&&mode==='after'&&rnd()<.5?pick(facCache):(q=>q[1]*W+q[0])(pick(rnd()<.5?NSP:SSP));if(t!==d.node&&isFinite(r.dist[t])){d.path=recon(r.prev,t);d.i=0;d.f=0;break;}}
+    if(!d.path)return;
+  }
+  const a=d.path[d.i],b=d.path[d.i+1];if(!ok(b)){d.path=null;return;}
+  const ai=a%N,bi=b%N,ax=ai%W,ay=(ai/W)|0,bx=bi%W,by=(bi/W)|0,La=a>=N,Lb=b>=N,ta=e.g[ay][ax];
+  // soapbox speech: only when standing on open ground at a tile boundary
+  if(d.speechCool<=0&&d.f===0&&!La&&d.z<1&&ta!==T.CROSS&&ta!==T.MED){d.state='speech';d.moving=false;d.talk={lines:pick(DOG_SPEECH),n:0,t:.2};track('dog-speech',true);return;}
+  if(!La&&!Lb&&e.g[by][bx]===T.CROSS&&ta!==T.CROSS&&d.f===0&&!pedGreen(bx,by,simT)){d.moving=false;}
+  else{d.moving=true;if(ai!==bi)d.dx=(bx-ax)-(by-ay)||d.dx;
+    d.f+=dtg/((ai===bi?6:2.45)*.8);const za=La?e.hk[ai]:0,zb=Lb?e.hk[bi]:0;
+    if(d.f>=1){d.f=0;d.i++;d.node=b;d.u=bx+.5;d.v=by+.5;d.z=zb;}else{d.u=ax+.5+(bx-ax)*d.f;d.v=ay+.5+(by-ay)*d.f;d.z=za+(zb-za)*d.f;}}
+  if(d.cool<=0){for(const p of peds){if(p.bike||p.chat>0||(p.state!=='walk'&&p.state!=='wait'&&p.state!=='linger'))continue;
+      if(Math.abs(p.u-d.u)+Math.abs(p.v-d.v)<2&&Math.abs(p.z-d.z)<3){
+        const mad=p.anger>.45,set=mad?DOG_TALKS.mad:(mode==='before'?DOG_TALKS.before:pick(DOG_TALKS.after)),rounds=3+((rnd()*2)|0);
+        d.state='chat';d.moving=false;p.chat=1;d.dx=(p.u-d.u)-(p.v-d.v)||d.dx;d.talk={p,mad,lines:set.slice(0,rounds-1).concat([set[3]]),n:0,t:.1};track('dog-chat',true);break;}}}
+}
+// pixel sprite, modelled on the round-glasses, orange-vest samoyed from the author's 無限都更島
+const DOG_ROWS=[
+"....KK.........KK....",
+"...KWWK.......KWWK...",
+"...KWPWKKKKKKKWPWK...",
+"..KWWWWWWWWWWWWWWWK..",
+"..KWWWWWWWWWWWWWWWK..",
+".KWWWKKKWWWWWKKKWWWK.",
+".KWWKLLgKKKKKLLgKWWK.",
+".KWKLLgLLKWKLLgLLKWK.",
+".KWWKgLLKWWWKgLLKWWK.",
+".KWWWKKKWWNWWKKKWWWK.",
+".KWWWWWWWNNNWWWWWWWK.",
+"..KWWWWWKWPWKWWWWWK..",
+"...KWWWWWKKKWWWWWK...",
+"..KOOOOOOOOOOOOOOOK..",
+".KWOOOOOOOOOOOOOOOWK.",
+".KWOoOOOOOYOOOOOoOWK.",
+".KWWOOOOOOYOOOOOOWWK.",
+".KWWWOOOOOOOOOOOWWWK.",
+".KWWWWWWWWWWWWWWWWWK.",
+".KWWSKWWWWWWWWWKSWWK.",
+".KWWWKKWWWWWWWKKWWWK.",
+"..KKKK.KKKKKKK.KKKK.."];
+const DOG_PAL={K:'#2d2a3e',W:'#ffffff',S:'#dfe5f2',O:'#ff7a1a',o:'#e2600a',L:'#ffffff',g:'#a9d8ff',E:'#2d2a3e',N:'#2d2a3e',P:'#ff9bb0',Y:'#fff3d6'};
+const DOG_SPR=(()=>{const c=document.createElement('canvas');c.width=21;c.height=22;const x=c.getContext('2d');
+  DOG_ROWS.forEach((r,y)=>{for(let i=0;i<21;i++){const ch=r[i];if(ch&&ch!=='.'){x.fillStyle=DOG_PAL[ch];x.fillRect(i,y,1,1);}}});return c;})();
+function drawSamoyed(d){
+  const q=P(d.u,d.v,d.z),x=q[0],dir=d.dx>0?1:-1,walk=d.state==='walk'&&d.moving,talking=d.state!=='walk';
+  const box=d.state==='speech'?7:0,bob=walk?(Math.floor(nowR*8)&1):(talking?(Math.floor(nowR*5)&1):0),wag=Math.floor(nowR*(talking?12:5))&1;
+  let y=q[1];
+  ctx.fillStyle='rgba(15,15,40,.3)';ctx.fillRect(x-10,y,21,2);
+  if(box){ // soapbox
+    ctx.fillStyle='#2d2a3e';ctx.fillRect(x-12,y-box-1,25,box+2);ctx.fillStyle='#c98f4e';ctx.fillRect(x-11,y-box,23,box);
+    ctx.fillStyle='#a8713a';ctx.fillRect(x-11,y-4,23,1);ctx.fillRect(x-4,y-box,1,box);ctx.fillRect(x+4,y-box,1,box);ctx.fillStyle='#e2b274';ctx.fillRect(x-11,y-box,23,1);
+    y-=box;}
+  // fluffy tail behind, wagging
+  const tx=x+(dir>0?-13:9),ty=y-12-wag;ctx.fillStyle='#2d2a3e';ctx.fillRect(tx,ty-1,5,8);ctx.fillRect(tx+(dir>0?1:-1),ty-2,4,3);
+  ctx.fillStyle='#ffffff';ctx.fillRect(tx+1,ty,3,6);ctx.fillRect(tx+(dir>0?2:0),ty-1,2,2);
+  ctx.drawImage(DOG_SPR,x-10,y-21-bob);
+  if(talking&&(Math.floor(nowR*6)&1)){ctx.fillStyle='#ff9bb0';ctx.fillRect(x-1,y-9-bob,3,1);}   // mouth opens while speaking
 }
 function updateCars(dtg){
   const e=env(),occ=new Set();for(const p of peds)if(p.z<2)occ.add(Math.floor(p.v)*W+Math.floor(p.u));
@@ -764,6 +880,7 @@ function render(){
   for(const x of PILLARS)put(22,x+.45+22,()=>drawPillar(x));
   for(const x of [3,57]){put(15,x+15+1.6,()=>drawSignal(x,15,16));put(27,x+27+1.6,()=>drawSignal(x,27,26));}
   for(const p of peds)put(p.v,p.u+p.v+(p.z>2?.45:.05),()=>drawPed(p));
+  put(dog.v,dog.u+dog.v+(dog.z>2?.46:.06),()=>drawSamoyed(dog));
   for(const c of cars)if(!c.deck)put(c.v+.5,c.u+c.v+.9,()=>drawCarShape(ctx,c.u,c.v,0,c.c,c.bus?2.6:1.5,c.bus,c.d));
   A1.sort((a,b)=>a[0]-b[0]);for(const it of A1)it[1]();
   drawDeck();
@@ -793,7 +910,7 @@ function drawLabel(pt,text,bg){
 function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
 const BTONE={good:['#2f9e5e','#eafbe9','#7bd389'],bad:['#d9534f','#fff0ee','#ff8f86'],mid:['#5a6acf','#eef0ff','#9aa5f0']};
 function drawBubble(p){
-  const w0=P(p.u,p.v,p.z+20),age=3-p.bub.t,a=Math.min(1,p.bub.t/.4,p.alpha+.2);
+  const w0=P(p.u,p.v,p.z+(p.bh||20)+(p===dog&&dog.state==='speech'?7:0)),age=3-p.bub.t,a=Math.min(1,p.bub.t/.4,p.alpha+.2);
   const sc=age<.28?(.4+.6*age/.28)*(1+.22*Math.sin(age/.28*Math.PI)):1;   // pop-in bounce
   const bob=Math.sin(nowR*3+p.ph)*1.5*dpr,tn=BTONE[p.bub.tone]||BTONE.mid;
   const fs=Math.max(11,Math.min(14,Math.round(11*S)))*dpr;uctx.font=`700 ${fs}px "Noto Sans TC",sans-serif`;
@@ -829,6 +946,7 @@ function renderUI(){
   drawLabel(P(W+2.5,21.5,DH+DT+6),'市民大道（高架）','#e3e6ef');drawLabel(P(W+2.5,9,4),'華山公園','#d6f5c4');
   drawLabel(P(34,H+2.5,-6),'中央藝文公園','#d6f5c4');drawLabel(P(-2.5,36,10),'華山1914','#ffd9c7');
   for(const q of peds)if(q.bub&&q.bub.t>0)drawBubble(q);
+  if(dog.bub&&dog.bub.t>0)drawBubble(dog);
 }
 
 // ---------- input ----------
@@ -884,7 +1002,7 @@ function paintAt([x,y]){
 function setTool(tl){tool=tl;document.querySelectorAll('[data-tool]').forEach(b=>b.classList.toggle('on',b.dataset.tool===tool));ui.style.cursor=tool==='hand'?'grab':'crosshair';}
 document.querySelectorAll('[data-tool]').forEach(b=>b.addEventListener('click',()=>{setTool(b.dataset.tool);track('tool/'+b.dataset.tool);}));
 function setMode(m){
-  mode=m;peds=[];resetStats();initCars();bakeGround();if(typeof applyMood==='function'&&musicOn)applyMood(false);
+  mode=m;peds=[];resetDog();resetStats();initCars();bakeGround();if(typeof applyMood==='function'&&musicOn)applyMood(false);
   document.querySelectorAll('#modeSeg button').forEach(b=>b.classList.toggle('on',b.dataset.mode===m));
   document.getElementById('liveTitle').textContent=m==='before'?'街上的人（改造前）':'街上的人（改造後）';
   document.querySelectorAll('#rail .tool,#autoBtn').forEach(b=>{b.disabled=(m==='before');});
@@ -969,7 +1087,7 @@ function shareText(){const red=Math.round((1-after.t/before.t)*100),f=myFaciliti
   let t='我在「縫合市民大道：華山篇」';
   t+=red>0?`把南北穿越時間從 ${fmtT(before.t)} 縮短到 ${fmtT(after.t)}（省 ${red}%），`:'開始動手縫合市民大道，';
   t+=`橋下 ${Math.round(after.open*100)}% 變成可以停留的空間`;if(f.list.length)t+=`，還蓋了${f.list.slice(0,4).join('、')}${f.list.length>4?'等':''}`;
-  return t+'！你也來縫縫看 👉';}
+  return t+'！你也來縫縫看 👉\n（政策參考：沈伯洋〈城市縫合－點亮市民大道〉；非官方個人製作小遊戲）';}
 function makeShareCard(){
   const c=shareC.getContext('2d'),Wc=1200,Hc=1260,ink='#2d2a3e',F=(w,px)=>`${w} ${px}px "Noto Sans TC",sans-serif`;
   const gr=c.createLinearGradient(0,0,0,Hc);const cols=[['#aee0ff','#e3f4ff','#fdf3df'],['#3b3f7a','#b9688c','#ffd9a0'],['#0d1230','#1b2452','#2e3a6e']][tod];
@@ -996,17 +1114,17 @@ function makeShareCard(){
   for(const n of f.list){const w=c.measureText(n).width+30;if(cx+w>1160)break;c.fillStyle=ink;c.fillRect(cx,cy,w,42);c.fillStyle='#ffd25e';c.fillRect(cx+3,cy+3,w-6,36);c.fillStyle=ink;c.fillText(n,cx+15,cy+29);cx+=w+10;}
   // footer
   card(40,1150,1120,74);c.textAlign='left';c.fillStyle=ink;c.font=F(900,24);c.fillText('你也來縫縫看 👉 '+SHARE_URL.replace('https://',''),66,1196);
-  c.textAlign='right';c.font=F(500,15);c.fillStyle='#6b6780';c.fillText('數字為遊戲模型估算；地圖為示意',1134,1180);c.fillText('非實測、非官方工程圖',1134,1202);
+  c.textAlign='right';c.font=F(500,15);c.fillStyle='#6b6780';c.fillText('個人製作・非官方｜數字為遊戲模型估算',1134,1180);c.fillText('政策參考：沈伯洋〈城市縫合－點亮市民大道〉',1134,1202);
   c.textAlign='left';
 }
 function openShare(){
   const xr=xray;xray=true;render();makeShareCard();xray=xr;render();const img=document.getElementById('shareImg');
   try{img.src=shareC.toDataURL('image/png');}catch(_){}
   shareBlob=null;shareC.toBlob(b=>{shareBlob=b;try{const f=new File([b],'stitch-result.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[f]}))document.getElementById('shNative').style.display='';}catch(_){}},'image/png');
-  const t=shareText(),E=encodeURIComponent;document.getElementById('shareTxt').textContent=t+' '+SHARE_URL;
+  const t=shareText(),E=encodeURIComponent;const parts=t.split('\n');document.getElementById('shareTxt').textContent=parts[0]+' '+SHARE_URL+'\n'+parts[1];
   document.getElementById('shLine').href='https://social-plugins.line.me/lineit/share?url='+E(SHARE_URL)+'&text='+E(t);
   document.getElementById('shFb').href='https://www.facebook.com/sharer/sharer.php?u='+E(SHARE_URL);
-  document.getElementById('shTh').href='https://www.threads.net/intent/post?text='+E(t+' '+SHARE_URL);
+  document.getElementById('shTh').href='https://www.threads.net/intent/post?text='+E(parts[0]+' '+SHARE_URL+'\n'+parts[1]);
   document.getElementById('share').classList.add('show');
 }
 for(const [id,n] of [['shLine','line'],['shFb','facebook'],['shTh','threads'],['shCopy','copy-text'],['shSave','save-image'],['shNative','native-share']])document.getElementById(id).addEventListener('click',()=>track('share/'+n));
@@ -1048,7 +1166,7 @@ function frame(now){
   for(let i=0;i<8&&rerouteQ.length;i++)reroute(rerouteQ.pop());
   const induced=mode==='after'?Math.max(1,Math.min(2,before.t/after.t))+after.open*.8:1;
   spawnAcc+=dtr*speed*1.5*induced;while(spawnAcc>1){spawnAcc-=1;if(peds.length<150)spawn();}
-  updatePeds(dtg,dtr);updateCars(dtg);
+  updatePeds(dtg,dtr);updateDog(dtg,dtr);updateCars(dtg);
   for(const c of clouds){c.x+=dtr*5;if(c.x>WW+10)c.x=-c.w-10;}
   render();renderUI();
   uiAcc+=dtr;if(uiAcc>.25){uiAcc=0;updateLive();}
@@ -1056,7 +1174,7 @@ function frame(now){
 }
 resize();bakeGround();updatePanel();for(let i=0;i<26;i++)spawn();
 requestAnimationFrame(frame);
-window.__game={before,get after(){return after},get peds(){return peds},setTod:t=>{tod=t;stage.className='t'+t;}};
+window.__game={dog,P,before,get after(){return after},get peds(){return peds},setTod:t=>{tod=t;stage.className='t'+t;}};
 })();
 </script>
 </body>
